@@ -1,5 +1,6 @@
 var siteloc = "http://localhost/paybill";
 var scriptloc = "/scripts/"
+var bal;
 
 
 
@@ -21,4 +22,32 @@ function getEmoney()
         }
     });
 }
+}
+
+function isSufficient()
+{
+  var PLDT_acct = $("#PLDT_acct").val();
+  var accountNum = $("#accountNum").val();
+  getemoney(accountNum);
+  get_balance(PLDT_acct)
+  if (bal < balance){
+      str = "Your E-Bank balance is not enough."
+      $("#target").html(str);
+  }else{
+    pay_balance(PLDT_acct, balance, accountNum);
+  }
+}
+
+function getemoney(accountNum)
+{
+ 
+      url: siteloc + scriptloc + "getemoney.py",
+      data: {accountNum:$("#accountNum").val(),
+      dataType: 'json',
+      success: function (res) {
+                console.log(res);
+                bal =  res[0][1];
+    } 
+        }
+ 
 }
