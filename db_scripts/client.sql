@@ -31,3 +31,6 @@ $$
     where password = $1;
 $$
     language 'sql';
+
+----------------------
+
