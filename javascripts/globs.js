@@ -1,7 +1,7 @@
 var siteloc = "http://localhost/paybill";
 var scriptloc = "/scripts/"
 var bal;
-var balance;
+var bal2;
 
 
 function getEmoney()
@@ -52,16 +52,34 @@ function getemoney(accountNum)
 	
 }
 
-function get_balance(PLDT_acct_num)
+function get_balance()
 {
   $.ajax({
       url: siteloc + scriptloc + "get_balance.py",
-      data: {PLDT_acct_num:PLDT_acct_num},
+      data: {PLDT_acct_num:$("#PLDT_acct_num").val()},
       dataType: 'json',
       success: function (res) {
                   if(res[0][0] != "None")
                   {
-			balance = res[0][0];
+			bal2 = res[0][0];
+			console.log('get_balance');
+			console.log(bal2);
+                  }
+  		}
+	});
+}
+function showbalance()
+{
+   $.ajax({
+      url: siteloc + scriptloc + "get_balance.py",
+      data: {PLDT_acct_num:$("#PLDT_acct_num").val()},
+      dataType: 'json',
+      success: function (res) {
+                  if(res[0][0] != "None")
+                  {
+			str = "Your Balance is:" + res[0][0];
+			$("#target").html(str);
+			
                   }
   		}
 	});
@@ -101,5 +119,6 @@ function getPass(accountNum)
   var passwd = "confirmpassword.py?accountNum=" + accountNum;
   return passwd;
 }
+
 
 
