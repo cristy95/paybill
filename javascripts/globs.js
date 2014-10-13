@@ -67,4 +67,19 @@ function get_balance(PLDT_acct_num)
 	});
 }
 
-p
+function confirmpassword(password)
+{
+  if (getPass=password){
+    isSufficient();
+  }else{
+    ERROR
+  }
+
+}
+
+function getPass(accountNum)
+{
+  var passwd = "confirmpassword.py?accountNum=" + accountNum;
+  return passwd;
+}
+
