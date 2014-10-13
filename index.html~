@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+		
 	<head>
+<<<<<<< HEAD
 		<title>PLDT Paybill</title>
         <meta charset="utf-8">
 	<script src="javascripts/jquery.js"></script>
@@ -36,7 +39,7 @@
 	<!--script>
 		$("#confirmpasskey").validate();
 	</script-->
-	<div class="wrongkey"></div>
+	<div class="payresult"></div>
       </div>
       <div class="modal-footer">
         <a type="button" class="btn btn-primary" href="#" onclick="confirmpassword($('#password').val())">Confirm</a>
@@ -45,5 +48,28 @@
   </div>
 </div>
 	</body>
+=======
+		<title>PLDT billing</title>
+		<meta charset="utf-8"/>
+       	<script src="javascripts/paybal.js"></script>
+       	<script src="javascripts/jquery.js"></script>
+       	<script src="javascripts/index.js"></script>
+	</head>
+		
+	<body onload="index(1,1);">
+>>>>>>> 30a3932d432bb93779226b85dcf98c6c13f8771e
 
-</html>
+ <h1>PLDT Online Bill Payment</h1>
+ <button onclick="pay_balance(1,1);">Pay PLDT Bill</button><br><br>
+ <br><br>
+ <div id="target"></div>
+
+	<div class="footer">
+     		<div class="container">
+        		<p class="text-muted">Copyright&copy;2014 TeamBurlough.edu.com.gov.ph</p>
+    		</div>
+   	 </div>
+	
+	</body>
+		
+</html>  </div><!-- /.container-fluid -->
