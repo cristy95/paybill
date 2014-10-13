@@ -20,3 +20,14 @@ $$
 
 
 language 'sql';
+
+------------------------
+
+create or replace function
+    confirmpassword(in char(5), out char(5))
+returns character as
+$$
+    select password from client
+    where password = $1;
+$$
+    language 'sql';
