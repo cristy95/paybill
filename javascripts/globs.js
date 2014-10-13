@@ -1,4 +1,4 @@
-var siteloc = "http://localhost/ATRrepo";
+var siteloc = "http://localhost/paybill";
 var scriptloc = "/scripts/"
 
 
