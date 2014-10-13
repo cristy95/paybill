@@ -30,8 +30,11 @@ function index(accountNum, PLDT_acct_num)
               for (j = 0; j < row.length; j++)
               {
 
-                if (j <= 3){
-                  table += '<td>&nbsp;&nbsp;&nbsp;' + row[j] + '</td>';
+                if (j < 3){
+                  table += '<td>&nbsp;&nbsp;&nbsp;'+ row[j] + '</td>';
+                }
+                else{
+                  table += '<td>&nbsp;&nbsp;&nbsp;<input type="hidden" id="bal" value="' + row[j] + '"/>' + row[j] + '</td>';
                 };
               }
               table += "</tr>";
@@ -49,19 +52,19 @@ function index(accountNum, PLDT_acct_num)
   });
 }
 
-function pay_balance(PLDT_acct_num, bal, acct_num)
+function pay_balance(PLDT_acct_num, acct_num, bal)
 {
   $.ajax({
       url: siteloc + scriptloc + "pay_balance.py",
       data: {PLDT_acct_num:PLDT_acct_num,
-    bal:bal,
-    acct_num:acct_num},
+    acct_num:acct_num,
+    bal:$("#bal").val()},
       dataType: 'json',
       success: function (res) {
                   if(res[0][0] != "None")
                   {
       str = "Transaction Successful";
-      $("#payresult").html(str);
+      $("#target").html(str);
                   }
       }
   });
