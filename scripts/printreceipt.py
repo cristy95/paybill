@@ -14,4 +14,4 @@ def index(req, acctno_fk, pldtacct_no_fk):
         stringed = map(str, rec)
         result.append(stringed)
 
-    result json.dumps(result)
+    return json.dumps(result)
