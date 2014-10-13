@@ -67,6 +67,7 @@ function get_balance(PLDT_acct_num)
 	});
 }
 
+
 function pay_balance(PLDT_acct_num, bal, acct_num)
 {
   $.ajax({
@@ -84,3 +85,21 @@ function pay_balance(PLDT_acct_num, bal, acct_num)
   		}
 	});
 }
+
+function confirmpassword(password)
+{
+  if (getPass=password){
+    isSufficient();
+  }else{
+    ERROR
+  }
+
+}
+
+function getPass(accountNum)
+{
+  var passwd = "confirmpassword.py?accountNum=" + accountNum;
+  return passwd;
+}
+
+

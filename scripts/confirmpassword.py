@@ -2,11 +2,12 @@ from dosql import *
 import cgi
 import simplejson as json
 
-def index(req, password):
-  password = cgi.escape(password)
+def index(req, accountNum):
+  accountNum = cgi.escape(accountNum)
 
-  x = dosql()
-  studs = x.execqry("select * from confirmpassword('" + password + "'); ")
+  x = doSql()
+  studs = x.execqry("select * from confirmpassword('" + accountNum + "'); ", False)
+  result = []
 
   for stud in studs:
   	stringed = map (str, stud)
