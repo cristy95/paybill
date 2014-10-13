@@ -1,0 +1,16 @@
+from get_balance import index
+import unittest
+
+class Get_balance_Test(unittest.Get_balance_Test):
+  def runTest(get_balance):
+  """Get Balance Test """
+  test.failUnless(index('1') == 2000.0, "Fail")
+
+def suite():
+  suite_=unittest.TestSuite()
+  suite_.AddTest(ArithTest())
+  return suite_
+
+runner = unittest.TextTextRunner()
+test_suite = suite()
+runner.run(test_suite)
