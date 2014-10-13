@@ -9,7 +9,7 @@ create table client
 
 create or replace function
 	getemoney(in int, out float)
-returns int as
+returns float as
 
 $$
 
