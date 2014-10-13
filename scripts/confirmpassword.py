@@ -1,12 +1,16 @@
 from dosql import *
 import cgi
-import simplejson as json
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
-def index(req, accountNum):
+def index(req, accountNum, password):
   accountNum = cgi.escape(accountNum)
+  password = cgi.escape(password)
 
   x = doSql()
-  studs = x.execqry("select * from confirmpassword('" + accountNum + "'); ", False)
+  studs = x.execqry("select * from confirmpassword(" + accountNum + ", '" + password + "'); ", False)
   result = []
 
   for stud in studs:
