@@ -22,7 +22,7 @@ function pay_balance(PLDT_acct_num, bal, acct_num)
 {
   $.ajax({
       url: siteloc + scriptloc + "pay_balance.py",
-      data: {PLDT_acct_num:PLDT_acct_num
+      data: {PLDT_acct_num:PLDT_acct_num,
 		bal:bal,
 		acct_num:acct_num},
       dataType: 'json',
