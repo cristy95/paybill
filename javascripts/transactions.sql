@@ -1,8 +1,8 @@
 	CREATE TABLE transaction(
 		receipt serial primary key,
-		dates char(8),
+		dates timestamp [2],
 		amount int,
-		PLDT_acct_num_fk int references PLDT_accounts(PLDT_acct_num)
+		PLDT_acct_num_fk int references PLDT_accounts(PLDT_acct_num),
 		accountNum_fk int references client(accountNum)
 	);
 
@@ -36,7 +36,7 @@
 	--------------------------------------------------------------------------
 
 	create or replace function
-		get_transaction(in int, in int, out int, out text, out int, out int)
+		get_transaction(in int, in int, out int, out timestamp[2], out int, out int)
 	returns setof record as
 	$$
 		select receipt, dates, amount, accountNum_fk from transaction
