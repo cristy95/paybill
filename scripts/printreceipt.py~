@@ -1,0 +1,16 @@
+from dosql import *
+import cgi
+import json
+
+def index(req, receipt):
+    receipt = cgi.escape(receipt)
+
+    x = doSql()
+    receipt = x.execqry("select * from transaction('" + receipt + "');", Fase)
+
+    result = []
+    for rec in receipt:
+        stringed = map(str, rec)
+        result.append(stringed)
+
+    result json.dumps(result)

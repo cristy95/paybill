@@ -1,0 +1,25 @@
+var siteloc = "http://localhost/paybill"
+var scriptloc = "/scripts/"
+
+function printreceipt(){
+    $.ajax({
+	url: siteloc + scriptloc + "printreceipt.py",
+	data: {acctno_fk:acctno_fk,
+		pldtacct_no_fk:pldtacct_no_fk
+		receipt:receipt},
+	dataType: 'json',
+	success: function (res){
+		console.log(res);
+		if(res[0][0] != "None")
+		{
+		    answer = 
+		}
+
+}
+	
+
+
+});
+
+}
+
