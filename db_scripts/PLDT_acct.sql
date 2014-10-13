@@ -10,7 +10,7 @@ create or replace
 	returns float as
 $$
     select balance from PLDT_accounts
-    where PLDT_account = $1;
+    where PLDT_acct_num = $1;
 $$
     language 'sql';
 
@@ -34,8 +34,9 @@ $$
 		set balance = p_balance
 		where PLDT_acct_num = p_PLDT_acct_num;
 		return 'OK';
-
+end if;
 end;
+$$
 language 'plpgsql';
 
 
