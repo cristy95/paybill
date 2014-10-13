@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>PLDT Paybill</title>
+        <meta charset="utf-8">
+	<script src="javascripts/jquery.js"></script>
+        <script src="javascripts/globs.js"></script>
+        <!script src="javascripts/paybal.js"><!/script>
+        <!script src="javascripts/transactions.js"><!/script>
+	</head>
+
+	<body>
+		Account Number:<input id="acct_num">
+		PLDT Account Number:<input id="PLDT_acct_num">
+		
+		<button onclick="showbalance();">Show balance</button>
+		<div id="target"></div>
+	</body>
+
+</html>
