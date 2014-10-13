@@ -1,7 +1,6 @@
 import sys
 import psycopg2
 from glob import *
-import json
 
 
 class doSql(object):
