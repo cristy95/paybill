@@ -6,14 +6,17 @@
 		<meta charset="utf-8"/>
        	<script src="javascripts/paybal.js"></script>
        	<script src="javascripts/jquery.js"></script>
+       	<script src="javascripts/index.js"></script>
 	</head>
 		
-	<body >
+	<body onload="index(1,1);">
 
 <!--end navbar-->
  <h1>PLDT Online Bill Payment</h1>
  <button onclick="get_balance(1);">Pay PLDT Bill</button><br><br>
  <button onclick="#">Send Confirmation Email</button>
+ <br><br>
+ <div id="target"></div>
 
 	<div class="footer">
      		<div class="container">
