@@ -7,7 +7,7 @@ def index(req, acctno_fk, pldtacct_no_fk):
     pldtacct_no_fk = cgi.escape(pldtacct_no_fk)
 
     x = doSql()
-    receipt = x.execqry("select * from get_transaction('"+ pldtacct_no_fk +"', '" + acctno_fk "');", False)
+    receipt = x.execqry("select * from get_transaction('" + pldtacct_no_fk + "', '" + acctno_fk + "');",  False)
 
     result = []
     for rec in receipt:
