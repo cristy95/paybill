@@ -5,15 +5,14 @@ try:
 except ImportError:
     import simplejson as json
 
-def index(req, PLDT_acct_num, balance, acct_num):
+def index(req, PLDT_acct_num,acct_num):
 
   PLDT_acct_num = cgi.escape(PLDT_acct_num)
-  balance = cgi.escape(balance)
   acct_num = cgi.escape(acct_num)
 
   x = doSql()
 
-  rets = x.execqry("select * from pay_balance(" + PLDT_acct_num + ", " + 0 + ", " + acct_num + ");", True)
+  rets = x.execqry("select * from pay_balance(" + PLDT_acct_num + ", 0, " + acct_num + ");", 'True')
 
 
   result = []

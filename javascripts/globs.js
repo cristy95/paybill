@@ -94,12 +94,11 @@ function showbalance()
 }
 
 
-function pay_balance(PLDT_acct_num, balance, acct_num)
+function pay_balance(PLDT_acct_num, acct_num)
 {
   $.ajax({
       url: siteloc + scriptloc + "pay_balance.py",
       data: {PLDT_acct_num:PLDT_acct_num,
-		balance:balance,
 		acct_num:acct_num},
       dataType: 'json',
       success: function (res) {
@@ -128,7 +127,7 @@ function confirmpassword(accountNum, password)
                   if(res[0][0] != "None")
                   {
 			
-			pay_balance(PLDT_acct, bal2, cl_acct);
+			pay_balance(PLDT_acct, cl_acct);
                   }else{
 			str = "Your account and the password don't match.";
 			$("#payresult").html(str);
