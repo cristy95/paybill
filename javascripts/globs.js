@@ -104,12 +104,9 @@ function pay_balance(PLDT_acct_num, acct_num)
       success: function (res) {
                   if(res[0][0] != "None")
                   {
-			str = 'Your Balance is:' + res[0][0];
-			str += '<div>'+
-				'<button onclick="isSufficient();">PAY BALANCE?</button>'+
-				'<div id="isenoughresult"></div>';
+			str = res[0][0];
 			
-			$("#target").html(str);
+			$("#payresult").html(str);
 			
                   }
   		}

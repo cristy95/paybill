@@ -2,22 +2,22 @@
 <html lang="en">
 		
 	<head>
-
-		<title>PLDT Paybill</title>
-        <meta charset="utf-8">
-	<script src="javascripts/jquery.js"></script>
-        <script src="javascripts/globs.js"></script>
+		<title>AUTOMATED TADMAN REGISTRATION</title>
+		<meta charset="utf-8"/>
+		
+		<script src="javascripts/jquery.js"></script>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap-theme.min.css">
        	<script src="javascripts/bootstrap.min.js"></script>
-       	<script src="javascripts/index.js"></script>
-        <!script src="javascripts/paybal.js"><!/script>
-        <!script src="javascripts/transactions.js"><!/script>
+	<script src="javascripts/jqinit.js"></script>
+	<script src="javascripts/globs.js"></script>
 	</head>
 
 	<body>
 		Account Number:<input id="accountNum">
 		PLDT Account Number:<input id="PLDT_acct_num">
 		
-		<button onclick="getemoney();get_balance();showbalance();">Show balance</button>
+		<button class="btn btn-primary" onclick="getemoney();get_balance();showbalance();">Show balance</button>
 		<div id="target"></div>
 
 
@@ -33,14 +33,10 @@
 	<form class="modal-form" id="confirmpasskey" method="get">
         <p class="modal-description">Please enter the your account's password.</p>
 	<p>
-	<!--label for="passkey">Pass Key (should be character of length 6)</label-->
 	<input type="password" id="password" placeholder="Enter Key">
 	</p>
 	</form>
-	<!--script>
-		$("#confirmpasskey").validate();
-	</script-->
-	<div class="payresult"></div>
+	<div id="payresult"></div>
       </div>
       <div class="modal-footer">
         <a type="button" class="btn btn-primary" href="#" onclick="confirmpassword($('#accountNum').val(), $('#password').val())">Confirm</a>

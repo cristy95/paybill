@@ -94,23 +94,19 @@ function showbalance()
 }
 
 
-function pay_balance(PLDT_acct_num, balance, acct_num)
+function pay_balance(PLDT_acct_num, acct_num)
 {
   $.ajax({
       url: siteloc + scriptloc + "pay_balance.py",
       data: {PLDT_acct_num:PLDT_acct_num,
-		balance:balance,
 		acct_num:acct_num},
       dataType: 'json',
       success: function (res) {
                   if(res[0][0] != "None")
                   {
-			str = 'Your Balance is:' + res[0][0];
-			str += '<div>'+
-				'<button onclick="isSufficient();">PAY BALANCE?</button>'+
-				'<div id="isenoughresult"></div>';
+			str = res[0][0];
 			
-			$("#target").html(str);
+			$("#payresult").append(str);
 			
                   }
   		}
