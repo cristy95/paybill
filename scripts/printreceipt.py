@@ -2,12 +2,11 @@ from dosql import *
 import cgi
 import json
 
-def index(req, acctno_fk, pldtacct_no_fk):
-    acctno_fk = cgi.escape(acctno_fk)
-    pldtacct_no_fk = cgi.escape(pldtacct_no_fk)
+def index(req, transactnum):
+    transactnum = cgi.escape(transactnum)
 
     x = doSql()
-    receipt = x.execqry("select * from get_transaction('" + pldtacct_no_fk + "', '" + acctno_fk + "');",  False)
+    receipt = x.execqry("select * from get_transaction(" + transactnum + ");",  'False')
 
     result = []
     for rec in receipt:

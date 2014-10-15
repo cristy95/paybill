@@ -10,7 +10,7 @@ def index(req, accountNum):
   accountNum = cgi.escape(accountNum)
 
   x = doSql()
-  studs = x.execqry("select * from getemoney('" + accountNum + "');", True)
+  studs = x.execqry("select * from getemoney('" + accountNum + "');", 'False')
   result = []
 
   for stud in studs:

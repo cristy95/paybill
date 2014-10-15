@@ -4,50 +4,39 @@ var bal;
 var bal2;
 var PLDT_acct;
 var cl_acct;
-
-function getEmoney()
-{
-  $.ajax({
-      url: siteloc + scriptloc + "getemoney.py",
-      data: {accountNum:$("#accountNum").val()},
-      dataType: 'json',
-      success: function (res) {
-                console.log(res);
-                if(res[0][0] == "None")
-				{
-			answer = '<h3>Your Balance is</h3>'
-					+ res[0][1];
-			$("#target").html(answer); 
-				}
- 
-        }
-    });
-}
+var count;
+var n = new Date();
 
 
 function isSufficient()
 {
   if (bal <= bal2){
-      str = "Your E-Bank balance is not enough."
+      str = "&nbsp;&nbsp;Your E-Bank balance is not enough."
       $("#isenoughresult").html(str);
   }else{
-    str = '<a type="button" href="#" data-toggle="modal" data-target="#myModal">'+
-		'PAY</a>'
-    $("#isenoughresult").html(str);
+	create_transaction
+    str = '&nbsp;&nbsp;&nbsp;<h3><a type="button" href="#" data-toggle="modal" data-target="#myModal">'+
+		'PAY</a></h3>'
+    $("#target").html(str);
   }
 }
 
-function getemoney(accountNum)
+function get(){
+	getemoney();
+	get_balance();
+}
+
+function getemoney()
 {
  $.ajax({
       url: siteloc + scriptloc + "getemoney.py",
       data: {accountNum:$("#accountNum").val()},
       dataType: 'json',
       success: function (res) {
-                console.log(res);
-                if(res[0][0] == "None")
+                if(res[0][0] != "None")
 		{
 			bal = res[0][0]
+			console.log(bal);
 		}
         }
     });
@@ -64,8 +53,6 @@ function get_balance()
                   if(res[0][0] != "None")
                   {
 			bal2 = res[0][0];
-			
-			console.log('get_balance');
 			console.log(bal2);
                   }
   		}
@@ -83,7 +70,7 @@ function showbalance()
                   {
 			str = 'Your Balance is:' + res[0][0];
 			str += '<div>'+
-				'<button onclick="isSufficient();">PAY BALANCE?</button>'+
+				'&nbsp;&nbsp;<button class="btn btn-primary" onclick="isSufficient();">PAY BALANCE?</button>'+
 				'<div id="isenoughresult"></div>';
 			
 			$("#target").html(str);
@@ -105,7 +92,6 @@ function pay_balance(PLDT_acct_num, acct_num)
                   if(res[0][0] != "None")
                   {
 			str = res[0][0];
-			
 			$("#payresult").html(str);
 			
                   }
@@ -125,19 +111,83 @@ function confirmpassword(accountNum, password)
                   {
 			
 			pay_balance(PLDT_acct, cl_acct);
+			create_transaction(n, bal2, PLDT_acct, cl_acct);
                   }else{
-			str = "Your account and the password don't match.";
+			str = "&nbsp;&nbsp;Your account and the password don't match.";
 			$("#payresult").html(str);
 			}
 		}
 	}); 
 }
 
-function getPass(accountNum)
+
+function get_count()
+{ 
+ $.ajax({
+      url: siteloc + scriptloc + "transaction.py/getcount",
+      data: {},
+      dataType: 'json',
+      success: function (res) {
+                  if(res[0][0] != "None")
+                  {
+			count  = res[0][0];
+			console.log(count);
+		  }
+		}
+	}); 
+}
+
+function create_transaction(date, amount, PLDT_acct_num, accountNum)
 {
-  var passwd = "confirmpassword.py?accountNum=" + accountNum;
-  return passwd;
+    $.ajax({
+	url: siteloc + scriptloc + "transaction.py",
+	data: {date:date,
+		amount:amount,
+		PLDT_acct_num:PLDT_acct_num,
+		accountNum:accountNum},
+    dataType: 'json',
+    success: function (res) {
+		rs = '&nbsp;&nbsp;<button class="btn btn-primary" onclick="printreceipt(' + res[0][0] + ');">PRINT RECEIPT</button>';
+		$("#target").html(rs);
+		answer = 'Receipt No: ' + res[0][0];
+		$("#receipt").html(answer);
+
+    }
+});
+
 }
 
 
+function printreceipt(transactnum){
+    $.ajax({
+	url: siteloc + scriptloc + "printreceipt.py",
+	data: {transactnum:transactnum},
+	dataType: 'json',
+	success: function (res){
+		console.log(res);
+		if(res[0][0] != "None")
+		{
+		    display = '<div>';
+		    display += '<p>&nbsp;Status&nbsp;OK</p>' 			 + '<p>&nbsp;Receipt Number&nbsp;'+ res[0][0] +'</p>' 
+		 + '<p>&nbsp;Date&nbsp;'+ res[0][1] +'</p>'
+		 + '<p>&nbsp;Account Number&nbsp;'+ res[0][3] +'</p>'
+		 + '<p>&nbsp;Amount&nbsp;'+ res[0][2] +'</p>';
 
+		display += '&nbsp;&nbsp;<button class=" btn-primary" onclick="sendreceipt(' + count+1 + ');">SEND RECEIPT</button>'
+		$("#target").html(display);
+
+		}
+
+}
+
+});
+}
+
+function sendreceipt(rectNum){
+	if(rectNum == count+1){
+		str = 'OK';
+	}else{
+		str = 'KO';
+	}
+	$("#target").html(str);
+}

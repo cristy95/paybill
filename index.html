@@ -13,11 +13,14 @@
 	<script src="javascripts/globs.js"></script>
 	</head>
 
-	<body>
-		Account Number:<input id="accountNum">
-		PLDT Account Number:<input id="PLDT_acct_num">
+	<body onload="get_count()">
+		<div class="inputs"> <h2> Welcome to PayBILL!</h2>
+			<p><br>
+			Account Number: &nbsp;<input id="accountNum"><br>
+			PLDT Account Number:&nbsp;<input id="PLDT_acct_num"><br></p>
 		
-		<button class="btn btn-primary" onclick="getemoney();get_balance();showbalance();">Show balance</button>
+		<button class="btn btn-primary" onclick="get();showbalance();">Show balance</button></div>
+		<br>
 		<div id="target"></div>
 
 
@@ -37,6 +40,7 @@
 	</p>
 	</form>
 	<div id="payresult"></div>
+	<div id="receipt"></div>
       </div>
       <div class="modal-footer">
         <a type="button" class="btn btn-primary" href="#" onclick="confirmpassword($('#accountNum').val(), $('#password').val())">Confirm</a>
@@ -45,7 +49,7 @@
   </div>
 </div>
 
-
+<br><br><br><br><br><br><br><br>
 	<div class="footer">
      		<div class="container">
         		<p class="text-muted">Copyright&copy;2014 TeamBurlough.edu.com.gov.ph</p>
