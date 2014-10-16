@@ -5,7 +5,7 @@ try:
 except ImportError:
     import simplejson as json
 
-def index(req, accountNum, ct):
+def index(req, accountNum):
   
   accountNum = cgi.escape(accountNum)
 

@@ -4,15 +4,17 @@ create table PLDT_accounts(
 	acct_num_fk int references client(accountNum)
 );
 
+-----------------------------------------------------------------
 create or replace
-	function get_balance(in int, out int, out float, out int)
-	returns setof record as
+	function get_balance(in int, out float)
+	returns float as
 $$
-    select * from PLDT_accounts
-    where PLDT_account = $1;
+    select balance from PLDT_accounts
+    where PLDT_acct_num = $1;
 $$
     language 'sql';
 
+-----------------------------------------------------------------
 create or replace
 	function pay_balance(p_PLDT_acct_num int, p_balance float, p_acct_num int)
 	returns text as
@@ -32,8 +34,19 @@ $$
 		set balance = p_balance
 		where PLDT_acct_num = p_PLDT_acct_num;
 		return 'OK';
-
+end if;
 end;
+$$
 language 'plpgsql';
 
-
+----------------------------------------------------------------
+create or replace function
+	get_bal(in int, in int, out int, out float, out int, out float)
+	returns setof record as
+$$
+	select client.accountNum, client.emoney, PLDT_accounts.PLDT_acct_num, PLDT_accounts.balance from PLDT_acct
+	inner join client on PLDT_accounts.acct_num_fk = client.accountNum
+	where PLDT_accounts.PLDT_acct_num = $1
+	and client.acct_num = $2;
+$$
+language 'sql';

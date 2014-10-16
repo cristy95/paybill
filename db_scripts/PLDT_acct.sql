@@ -39,4 +39,14 @@ end;
 $$
 language 'plpgsql';
 
-
+----------------------------------------------------------------
+create or replace function
+	get_bal(in int, in int, out int, out float, out int, out float)
+	returns setof record as
+$$
+	select client.accountNum, client.emoney, PLDT_accounts.PLDT_acct_num, PLDT_accounts.balance from PLDT_accounts
+	inner join client on PLDT_accounts.acct_num_fk = client.accountNum
+	where PLDT_accounts.PLDT_acct_num = $1
+	and client.accountNum = $2;
+$$
+language 'sql';

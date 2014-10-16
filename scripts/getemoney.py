@@ -18,3 +18,18 @@ def index(req, accountNum):
     result.append(stringed)
 	
   return json.dumps(result)
+
+
+def get_bal(req, PLDT_acct_num, accountNum):
+  PLDT_acct_num = cgi.escape(PLDT_acct_num)
+  accountNum = cgi.escape(accountNum)
+
+  y= doSql()
+  rets = y.execqry("select * from get_bal(" + PLDT_acct_num + ", " + accountNum + ");", 'False')
+  result = []
+
+  for ret in rets:
+    stringed = map(str, ret)
+    result.append(stringed)
+
+  return json.dumps(result)

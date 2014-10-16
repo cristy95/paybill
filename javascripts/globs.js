@@ -26,7 +26,7 @@ function get(){
 	get_balance();
 }
 
-function getemoney()
+/*function getemoney()
 {
  $.ajax({
       url: siteloc + scriptloc + "getemoney.py",
@@ -59,6 +59,7 @@ function get_balance()
 	});
   PLDT_acct = $("#PLDT_acct_num").val();
 }
+
 function showbalance()
 {
    $.ajax({
@@ -78,7 +79,7 @@ function showbalance()
                   }
   		}
 	});
-}
+}*/
 
 
 function pay_balance(PLDT_acct_num, acct_num)
@@ -190,4 +191,39 @@ function sendreceipt(rectNum){
 		str = 'KO';
 	}
 	$("#target").html(str);
+}
+
+
+
+function get_bal(){
+   $.ajax({
+	url: siteloc + scriptloc + "getemoney.py/get_bal",
+	data: {PLDT_acct_num:$("#PLDT_acct_num").val(),
+		accountNum:$("#accountNum").val()},
+    dataType: 'json',
+    success: function (res) {
+		if(res[0][0] != 'None'){
+			bal = res[0][1];
+			console.log(bal);
+			bal2 = res[0][3];
+			console.log(bal2);
+			
+			str = 'Your Balance is:' + res[0][3];
+			str += '<div>'+
+				'&nbsp;&nbsp;<button class="btn btn-primary" onclick="isSufficient();">PAY BALANCE?</button>'+
+				'<div id="isenoughresult"></div>';
+			
+			$("#target").html(str);
+		}else{
+			str = 'The account numbers do not match.'
+			$("#target").html(str);
+		}	
+
+    }
+});
+
+
+  cl_acct = $("#accountNum").val();
+  PLDT_acct = $("#PLDT_acct_num").val();
+
 }
